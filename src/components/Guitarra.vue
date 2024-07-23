@@ -1,10 +1,13 @@
 <script setup>
+
     const props = defineProps({
         guitarra: {
             type: Object,
             required: true,
         }
     })
+
+    defineEmits(['agregar-carrito'])
 </script>
 
 <template>
@@ -22,8 +25,12 @@
             <p class="fw-black text-primary fs-3">${{ guitarra.precio }}</p>
             <button 
                 type="button"
-                class="btn btn-dark w-100 "
+                class="btn btn-dark w-100"
+                @click="$emit('agregar-carrito', guitarra)"
             >Agregar al Carrito</button>
+            <!-- v-on:click="incrementar" -->
+            <!-- v-on:click="numero++" -->
+            <!-- @click="borrarPresuncion(i) -->
         </div>
-    </div><!-- FIN GUITARRA -->
+    </div>
 </template>
