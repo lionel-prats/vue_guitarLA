@@ -11,15 +11,18 @@
 
     const guitarras = ref([]);
     const carrito = ref([]);
+    const guitarra = ref({});
 
     onMounted(() => {
         guitarras.value = db
         // state.guitarras = db
+        guitarra.value = db[3]
     })
 
     const agregarCarrito = (guitarra) => {
         const existeCarrito = carrito.value.findIndex(producto => producto.id == guitarra.id)
         if(existeCarrito >= 0) {
+            if (carrito.value[existeCarrito].cantidad >= 5) return
             carrito.value[existeCarrito].cantidad++
         } else {
             guitarra.cantidad = 1
@@ -43,6 +46,8 @@
 <template>
     <Header
         :carrito="carrito"
+        :guitarra="guitarra"
+        @agregar-carrito="agregarCarrito"
         @decrementar-cantidad="decrementarCantidad"
         @incrementar-cantidad="incrementarCantidad"
     />
